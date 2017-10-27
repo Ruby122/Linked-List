@@ -183,6 +183,6 @@ int main(int argc, const char * argv[]) {
 	}
 	fclose(file);
 	free(temp);
-	free(afterMe);
+	//free(afterMe);otherwise we have double free 
 	return 0;
 }

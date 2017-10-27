@@ -12,12 +12,10 @@ typedef struct node {
 int main(int argc, const char * argv[]) {
 	//read the input file
 	FILE* file;
-	char fileName[20];
-	strcpy(fileName, "a.txt");
 	/* IMPORTANT: 
 	   w+: clean the text file first and then read or write
 	   r: read and write*/
-	file = fopen(fileName, "r");
+	file = fopen("a.txt", "r");
 	//declare the head and initialize the first node
 	ListNode *afterMe, *temp, *head = malloc(sizeof(ListNode));;
 	if(file == NULL){
@@ -159,15 +157,15 @@ int main(int argc, const char * argv[]) {
 					printf("illegal Node number!\n\n");
 				}
 				else{
+					afterMe = head;
 					//remove the first node
 					if(num == 1){
-						free(head);
-						head = temp->link;
+						head = afterMe->link;
+						free(afterMe);
 					}
 					//remove from the middle
 					else{
 						//find the node after which the node with corresponding number should be deleted
-						afterMe = head;
 						for(int i = 1; i < num - 1; i++){
 							afterMe = afterMe->link;
 						}
@@ -183,6 +181,7 @@ int main(int argc, const char * argv[]) {
 			}
 		}
 	}
+	fclose(file);
 	free(temp);
 	free(afterMe);
 	return 0;
